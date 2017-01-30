@@ -11,7 +11,7 @@ public class HostInfo {
   private final String hostname;
 
   public HostInfo() throws IOException {
-    this.hostname = execReadToString("hostname");
+    this.hostname = execReadToString("cat /etc/hostname");
   }
 
   public String getHostname() {
