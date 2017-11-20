@@ -19,17 +19,9 @@ node('master') {
   env.STAGE2 = "${projectBase}-stage"
   env.STAGE3 = "${projectBase}-prod"
 
-  sh(returnStdout: true, script: "${env.OC_CMD} get is jenkins-slave-image-mgmt --template=\'{{ .status.dockerImageRepository }}\' -n openshift > /tmp/jenkins-slave-image-mgmt.out")
-  env.SKOPEO_SLAVE_IMAGE = readFile('/tmp/jenkins-slave-image-mgmt.out').trim()
-  println "${env.SKOPEO_SLAVE_IMAGE}"
-
 }
 
 node('maven') {
-//  def artifactory = Artifactory.server(env.ARTIFACTORY_SERVER)
-  // def artifactoryMaven = Artifactory.newMavenBuild()
-  // def buildInfo = Artifactory.newBuildInfo()
-  // def scannerHome = tool env.SONARQUBE_TOOL
   def mvnHome = "/usr/share/maven/"
   def mvnCmd = "${mvnHome}bin/mvn"
   String pomFileLocation = env.BUILD_CONTEXT_DIR ? "${env.BUILD_CONTEXT_DIR}/pom.xml" : "pom.xml"
