@@ -37,21 +37,29 @@ node('maven') {
 
   }
 
+  stage('Unit Test') {
+
+     sh "${mvnCmd} test -f ${pomFileLocation}"
+
+  }
+
+  // The following variables need to be defined at the top level and not inside
+  // the scope of a stage - otherwise they would not be accessible from other stages.
+  // Extract version and other properties from the pom.xml
+  def groupId    = getGroupIdFromPom("./pom.xml")
+  def artifactId = getArtifactIdFromPom("./pom.xml")
+  def version    = getVersionFromPom("./pom.xml")
+  println("Artifact ID:" + artifactId + ", Group ID:" + groupId)
+  println("New version tag:" + version)
+
   stage('Build Image') {
 
     sh """
-       rm -rf oc-build && mkdir -p oc-build/deployments
-
-       for t in \$(echo "jar;war;ear" | tr ";" "\\n"); do
-         cp -rfv ./target/*.\$t oc-build/deployments/ 2> /dev/null || echo "No \$t files"
-       done
-
-       for i in oc-build/deployments/*.war; do
-          mv -v oc-build/deployments/\$(basename \$i) oc-build/deployments/ROOT.war
-          break
-       done
-
-       ${env.OC_CMD} start-build ${env.APP_NAME} --from-dir=oc-build --wait=true --follow=true || exit 1
+      rm -rf oc-build && mkdir -p oc-build/deployments
+      for t in \$(echo "jar;war;ear" | tr ";" "\\n"); do
+        cp -rfv ./target/*.\$t oc-build/deployments/ 2> /dev/null || echo "No \$t files"
+      done
+      ${env.OC_CMD} start-build ${env.APP_NAME} --from-dir=oc-build --wait=true --follow=true || exit 1
     """
   }
 
