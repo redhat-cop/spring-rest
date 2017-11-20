@@ -22,8 +22,8 @@ node('master') {
 }
 
 node('maven') {
-\\  def mvnHome = "/usr/share/maven/"
-\\  def mvnCmd = "${mvnHome}bin/mvn"
+//  def mvnHome = "/usr/share/maven/"
+//  def mvnCmd = "${mvnHome}bin/mvn"
   def mvnCmd = 'mvn'
   String pomFileLocation = env.BUILD_CONTEXT_DIR ? "${env.BUILD_CONTEXT_DIR}/pom.xml" : "pom.xml"
 
