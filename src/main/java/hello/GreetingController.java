@@ -2,6 +2,8 @@ package hello;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.List;
+import java.util.Arrays;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class GreetingController {
 
     private static final String template = "Hello, %s!";
+    private static final String welcome = "This is my webservice!";
+    private static final List<String> paths = Arrays.asList("/", "/greeting", "/hostinfo");
     private final AtomicLong counter = new AtomicLong();
 
     @RequestMapping("/greeting")
@@ -20,7 +24,7 @@ public class GreetingController {
 
     @RequestMapping("/")
     public Welcome welcome() {
-      return new Welcome(new String("This is my webservice!"));
+      return new Welcome(welcome, paths);
     }
 
     @RequestMapping("/hostinfo")
