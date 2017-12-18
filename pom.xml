@@ -15,6 +15,8 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <spring-boot.bom.version>1.5.8.Final-redhat-1</spring-boot.bom.version>
         <springboot.version>1.5.8.RELEASE</springboot.version>
+        <springboot.metrics.version>0.5.1.RELEASE</springboot.metrics.version>
+        <prometheus.client.version>0.1.0</prometheus.client.version>
     </properties>
 
     <dependencyManagement>
@@ -42,6 +44,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.metrics</groupId>
+            <artifactId>spring-metrics</artifactId>
+            <version>${springboot.metrics.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.prometheus</groupId>
+            <artifactId>simpleclient_common</artifactId>
+            <version>${prometheus.client.version}</version>
         </dependency>
     </dependencies>
 
