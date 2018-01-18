@@ -23,12 +23,11 @@ public class EnvInfo {
   public static Map<String,String> mapEnvInfo(String filter) throws IOException {
       Process proc = Runtime.getRuntime().exec("env");
       Map<String, String> ret = new HashMap<String,String>();
-      /*      try (InputStream stream = proc.getInputStream()) {
+            try (InputStream stream = proc.getInputStream()) {
           try (Scanner s = new Scanner(stream).useDelimiter("\\n")) {
         	  while (s.hasNext())
         	  {
                   String val =  s.next();
-                  System.out.println(val);
                   String[] nameVal = val.split("=");
                   if (filter.equalsIgnoreCase("*"))
                 	  ret.put(nameVal[0],nameVal.length > 1 ? nameVal[1] : "");
@@ -42,7 +41,7 @@ public class EnvInfo {
                   
         	  }
           } 
-      } */
+      } 
       return ret;
   }
 }

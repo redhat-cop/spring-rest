@@ -34,7 +34,6 @@ public class Application {
         
     @Bean
     public Docket swaggerSpringMvcPlugin() {
-    	System.out.println("PATHS:" + apiPaths());
         return new Docket(DocumentationType.SWAGGER_2)
             .useDefaultResponseMessages(false)
             .apiInfo(apiInfo())

@@ -11,19 +11,18 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/v2")
 public class GreetingController {
 
     private static final String template = "Hello, %s!";
     private static final String welcome = "This is my webservice!";
-    private static final List<String> paths = Arrays.asList("/", "/greeting", "/hostinfo");
+    private static final List<String> paths = Arrays.asList("/v2/envinfo", "/v2/greeting", "/v2/hostinfo", "/swagger.json");
     private final Counter counter;
 
     public GreetingController(MeterRegistry registry) {
        counter = registry.counter("greeting_counter");
     }
 
-    @RequestMapping(value = "/greeting" ,  method = RequestMethod.GET)
+    @RequestMapping(value = "/v2/greeting" ,  method = RequestMethod.GET)
     @ApiOperation(value = "Generate a greeting for a given name")
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
         counter.increment();
@@ -37,13 +36,13 @@ public class GreetingController {
       return new Welcome(welcome, paths);
     }
 
-    @RequestMapping(value = "/hostinfo",  method = RequestMethod.GET)
+    @RequestMapping(value = "/v2/hostinfo",  method = RequestMethod.GET)
     @ApiOperation(value = "List host name running the sample application.")
     public HostInfo hostinfo() throws IOException {
       return new HostInfo();
     }
     
-    @RequestMapping(value = "/envinfo" ,  method = RequestMethod.GET)
+    @RequestMapping(value = "/v2/envinfo" ,  method = RequestMethod.GET)
     @ApiOperation(value = "Display environment variables.")
     public EnvInfo envinfo(@RequestParam(value="filter", defaultValue="*") String filter) throws IOException {
       return new EnvInfo(filter);
