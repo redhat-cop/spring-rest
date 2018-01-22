@@ -45,10 +45,10 @@ public class Application {
 
     private Predicate<String> apiPaths() {
         return or(
-                regex("/v2/greeting.*"),
-                regex("/v2/hostinfo.*"),
-                regex("/v2/envinfo.*"),
-                regex("/v2/*")
+                regex("/v1/greeting.*"),
+                regex("/v1/hostinfo.*"),
+                regex("/v1/envinfo.*"),
+                regex("/v1/*")
         );
     }    
 
