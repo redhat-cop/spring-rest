@@ -17,6 +17,8 @@
         <springboot.version>1.5.8.RELEASE</springboot.version>
         <springboot.metrics.version>0.5.1.RELEASE</springboot.metrics.version>
         <prometheus.client.version>0.1.0</prometheus.client.version>
+        <springfox-version>2.5.0</springfox-version>
+        <swagger-core-version>1.5.10</swagger-core-version>
     </properties>
 
     <dependencyManagement>
@@ -42,10 +44,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.metrics</groupId>
             <artifactId>spring-metrics</artifactId>
             <version>${springboot.metrics.version}</version>
@@ -55,6 +53,23 @@
             <artifactId>simpleclient_common</artifactId>
             <version>${prometheus.client.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!--SpringFox dependencies -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox-version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.swagger/swagger-core -->
+        <dependency>
+          <groupId>io.swagger</groupId>
+          <artifactId>swagger-core</artifactId>
+          <version>${swagger-core-version}</version>
+        </dependency>
+        
     </dependencies>
 
 
