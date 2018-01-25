@@ -22,16 +22,13 @@ import static com.google.common.base.Predicates.*;
 @SpringBootApplication
 @EnablePrometheusMetrics
 @EnableSwagger2
-@ComponentScan(basePackageClasses = {
-            GreetingController.class,
-            SimpleCORSFilter.class
-        })
+@ComponentScan(basePackages = {"hello"})
 public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);    
     }
-        
+
     @Bean
     public Docket swaggerSpringMvcPlugin() {
         return new Docket(DocumentationType.SWAGGER_2)
