@@ -8,14 +8,13 @@ import org.springframework.metrics.instrument.Counter;
 import org.springframework.metrics.instrument.MeterRegistry;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 
 @RestController
 public class GreetingController {
 
     private static final String template = "Hello, %s!";
-    private static final String welcome = "This is my webservice!";
-    private static final List<String> paths = Arrays.asList("/v1/envinfo", "/v1/greeting", "/v1/hostinfo", "/swagger.json");
     private final Counter counter;
 
     public GreetingController(MeterRegistry registry) {
@@ -30,11 +29,11 @@ public class GreetingController {
                             String.format(template, name));
     }
 
-    @RequestMapping(value = "/" ,  method = RequestMethod.GET)
-    @ApiOperation(value = "Sample REST default path, list operations", nickname = "getGreeting")
-    public Welcome welcome() {
-      return new Welcome(welcome, paths);
+    @GetMapping("/")
+    public RedirectView index() {
+        return new RedirectView("swagger-ui.html");
     }
+
 
     @RequestMapping(value = "/v1/hostinfo",  method = RequestMethod.GET)
     @ApiOperation(value = "List host name running the sample application.")
