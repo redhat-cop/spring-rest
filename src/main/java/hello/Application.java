@@ -1,16 +1,18 @@
 package hello;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.metrics.export.prometheus.EnablePrometheusMetrics;
 
 import com.google.common.base.Predicate;
 
-import hello.utils.SimpleCORSFilter;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger.web.UiConfiguration;
+import springfox.documentation.swagger.web.UiConfigurationBuilder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import org.springframework.context.annotation.Bean;
@@ -24,6 +26,9 @@ import static com.google.common.base.Predicates.*;
 @EnableSwagger2
 @ComponentScan(basePackages = {"hello"})
 public class Application {
+
+	@Value("${shift.rest.disableValidator}")
+	private boolean disableValidator;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);    
@@ -39,6 +44,18 @@ public class Application {
             .build();
     }
     
+    @Bean
+    UiConfiguration uiConfig() {
+
+        UiConfigurationBuilder builder = UiConfigurationBuilder.builder();
+
+        if(disableValidator) {
+            builder.validatorUrl("");
+        }
+
+        return builder.build();
+    }
+
 
     private Predicate<String> apiPaths() {
         return or(
