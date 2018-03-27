@@ -1,4 +1,4 @@
-package hello;
+package com.hello;
 
 import java.util.List;
 import java.util.Arrays;

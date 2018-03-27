@@ -1,4 +1,4 @@
-package hello;
+package com.hello;
 
 import java.io.IOException;
 import java.io.InputStream;
