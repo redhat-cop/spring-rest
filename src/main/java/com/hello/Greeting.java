@@ -1,7 +1,16 @@
-package hello;
+package com.hello;
 
+import javax.persistence.Entity;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+
+@Entity
+@Document
 public class Greeting {
 
+    @Id
     private final long id;
     private final String content;
 
