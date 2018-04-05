@@ -1,7 +1,13 @@
-package hello;
+package com.hello;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+
+@Document
 public class Greeting {
 
+    @Id
     private final long id;
     private final String content;
 

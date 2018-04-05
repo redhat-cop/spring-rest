@@ -1,4 +1,4 @@
-package hello;
+package com.hello;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -24,7 +24,7 @@ import static com.google.common.base.Predicates.*;
 @SpringBootApplication
 @EnablePrometheusMetrics
 @EnableSwagger2
-@ComponentScan(basePackages = {"hello"})
+@ComponentScan(basePackages = {"com.hello"})
 public class Application {
 
 	@Value("${shift.rest.disableValidator}")
