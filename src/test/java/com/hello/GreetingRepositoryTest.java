@@ -1,5 +1,7 @@
 package com.hello;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +17,17 @@ import com.hello.GreetingRepository;
 @SpringBootTest(classes = Application.class, webEnvironment = WebEnvironment.RANDOM_PORT)
 public class GreetingRepositoryTest {
 
-//	@Autowired
-//	private GreetingRepository greetingRepository;
-//
-//	@Test
-//	public void saveGreeting() {
-//		Greeting greeting = new Greeting(1, "Welcome");
-//		greetingRepository.save(greeting);
-//
-//		Greeting g = greetingRepository.findOne(greeting.getId());
-//		System.out.println(g.toString());
-//	}
+	@Autowired
+	private GreetingRepository greetingRepository;
+
+	@Test
+	public void saveGreeting() {
+		Greeting greeting = new Greeting(1, "Welcome");
+		greetingRepository.save(greeting);
+
+		Greeting g = greetingRepository.findOne(greeting.getId());
+		assertEquals(1, g.getId());
+	}
 	
 	@Test
 	public void contextLoads() {

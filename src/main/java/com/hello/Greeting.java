@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
-@Document
+@Document(collection = "greeting")
 public class Greeting {
 
     @Id
@@ -23,4 +23,5 @@ public class Greeting {
     public String getContent() {
         return content;
     }
+    
 }
