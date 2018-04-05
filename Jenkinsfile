@@ -18,6 +18,9 @@ node('master') {
   env.STAGE1 = "${projectBase}-dev"
   env.STAGE2 = "${projectBase}-stage"
   env.STAGE3 = "${projectBase}-prod"
+  env.UBER_JAR_CONTEXT_DIR = "target/"
+
+  
 
 }
 
@@ -54,13 +57,9 @@ node('maven') {
 
   stage('Build Image') {
 
-    sh """
-      rm -rf oc-build && mkdir -p oc-build/deployments
-      for t in \$(echo "jar;war;ear" | tr ";" "\\n"); do
-        cp -rfv ./target/*.\$t oc-build/deployments/ 2> /dev/null || echo "No \$t files"
-      done
-      ${env.OC_CMD} start-build ${env.APP_NAME} --from-dir=oc-build --wait=true --follow=true || exit 1
-    """
+	sh "oc start-build ${env.APP_NAME} --from-dir=${env.UBER_JAR_CONTEXT_DIR} --follow"
+
+
   }
 
   stage("Verify Deployment to ${env.STAGE1}") {
