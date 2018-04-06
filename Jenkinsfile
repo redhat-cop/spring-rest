@@ -26,7 +26,7 @@ node('maven') {
   String pomFileLocation = env.BUILD_CONTEXT_DIR ? "${env.BUILD_CONTEXT_DIR}/pom.xml" : "pom.xml"
 
   stage('Build') {
-    git url: "${APPLICATION_SOURCE_REPO}"
+    checkout scm
     sh "${mvnCmd} clean install -DskipTests=true -f ${pomFileLocation}"
   }
 
