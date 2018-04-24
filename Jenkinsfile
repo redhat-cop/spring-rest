@@ -14,7 +14,7 @@ node('master') {
   env.OC_CMD = "oc --token=${env.TOKEN} --server=${ocpApiServer} --certificate-authority=/run/secrets/kubernetes.io/serviceaccount/ca.crt --namespace=${env.NAMESPACE}"
 
   env.APP_NAME = "${env.JOB_NAME}".replaceAll(/-?pipeline-?/, '').replaceAll(/-?${env.NAMESPACE}-?/, '')
-  def projectBase = "${env.NAMESPACE}".replaceAll(/-dev/, '')
+  def projectBase = "${env.NAMESPACE}".replaceAll(/-build/, '')
   env.STAGE1 = "${projectBase}-dev"
   env.STAGE2 = "${projectBase}-stage"
   env.STAGE3 = "${projectBase}-prod"
@@ -22,19 +22,12 @@ node('master') {
 }
 
 node('maven') {
-//  def mvnHome = "/usr/share/maven/"
-//  def mvnCmd = "${mvnHome}bin/mvn"
   def mvnCmd = 'mvn'
   String pomFileLocation = env.BUILD_CONTEXT_DIR ? "${env.BUILD_CONTEXT_DIR}/pom.xml" : "pom.xml"
 
-  stage('SCM Checkout') {
-    checkout scm
-  }
-
   stage('Build') {
-
+    checkout scm
     sh "${mvnCmd} clean install -DskipTests=true -f ${pomFileLocation}"
-
   }
 
   stage('Unit Test') {
@@ -43,23 +36,21 @@ node('maven') {
 
   }
 
-  // The following variables need to be defined at the top level and not inside
-  // the scope of a stage - otherwise they would not be accessible from other stages.
-  // Extract version and other properties from the pom.xml
-  //def groupId    = getGroupIdFromPom("./pom.xml")
-  //def artifactId = getArtifactIdFromPom("./pom.xml")
-  //def version    = getVersionFromPom("./pom.xml")
-  //println("Artifact ID:" + artifactId + ", Group ID:" + groupId)
-  //println("New version tag:" + version)
 
   stage('Build Image') {
 
-    sh """
+    sh '''
       rm -rf oc-build && mkdir -p oc-build/deployments
       for t in \$(echo "jar;war;ear" | tr ";" "\\n"); do
         cp -rfv ./target/*.\$t oc-build/deployments/ 2> /dev/null || echo "No \$t files"
       done
       ${env.OC_CMD} start-build ${env.APP_NAME} --from-dir=oc-build --wait=true --follow=true || exit 1
+    '''
+  }
+
+  stage("Promote To ${env.STAGE1}") {
+    sh """
+    ${env.OC_CMD} tag ${env.NAMESPACE}/${env.APP_NAME}:latest ${env.STAGE1}/${env.APP_NAME}:latest
     """
   }
 
