@@ -18,7 +18,7 @@ node('master') {
   env.STAGE1 = "${projectBase}-dev"
   env.STAGE2 = "${projectBase}-stage"
   env.STAGE3 = "${projectBase}-prod"
-
+    env.OCP_API_SERVER = "${env.OPENSHIFT_API_URL}"
 }
 
 node('maven') {
