@@ -15,7 +15,7 @@ import com.hello.GreetingRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = WebEnvironment.RANDOM_PORT)
-public class GreetingRepositoryTest {
+public class GreetingRepositoryIT {
 
 	@Autowired
 	private GreetingRepository greetingRepository;
