@@ -12,7 +12,7 @@ node('master') {
   env.NAMESPACE = readFile('/var/run/secrets/kubernetes.io/serviceaccount/namespace').trim()
   env.TOKEN = readFile('/var/run/secrets/kubernetes.io/serviceaccount/token').trim()
   env.OC_CMD = "oc --token=${env.TOKEN} --server=${ocpApiServer} --certificate-authority=/run/secrets/kubernetes.io/serviceaccount/ca.crt --namespace=${env.NAMESPACE}"
-
+  env.UBER_JAR_CONTEXT_DIR="target/"
   env.APP_NAME = "${env.JOB_NAME}".replaceAll(/-?pipeline-?/, '').replaceAll(/-?${env.NAMESPACE}-?/, '')
   def projectBase = "${env.NAMESPACE}".replaceAll(/-build/, '')
   env.STAGE1 = "${projectBase}-dev"
@@ -39,13 +39,7 @@ node('maven') {
 
   stage('Build Image') {
 
-    sh '''
-      rm -rf oc-build && mkdir -p oc-build/deployments
-      for t in \$(echo "jar;war;ear" | tr ";" "\\n"); do
-        cp -rfv ./target/*.\$t oc-build/deployments/ 2> /dev/null || echo "No \$t files"
-      done
-      ${env.OC_CMD} start-build ${env.APP_NAME} --from-dir=oc-build --wait=true --follow=true || exit 1
-    '''
+    sh "oc start-build ${env.APP_NAME} --from-dir=${env.UBER_JAR_CONTEXT_DIR} --follow"
   }
 
   stage("Promote To ${env.STAGE1}") {
