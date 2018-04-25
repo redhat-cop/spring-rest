@@ -16,7 +16,7 @@ node (''){
 
 
 
-node('jenkins-slave-mvn') {
+node('maven') {
 
   stage('SCM Checkout') {
     checkout scm
