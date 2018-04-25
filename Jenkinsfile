@@ -4,7 +4,7 @@
 node (''){
     env.DEV_PROJECT = env.OPENSHIFT_BUILD_NAMESPACE
     env.SOURCE_CONTEXT_DIR = ""
-    env.UBER_JAR_CONTEXT_DIR = "target/"
+    env.UBER_JAR_CONTEXT_DIR = "/tmp/workspace/rahman-sandbox-spring-rest/target/"
     env.MVN_COMMAND = "clean install"
     env.APP_NAME = "${env.JOB_NAME}".replaceAll(/-?${env.PROJECT_NAME}-?/, '').replaceAll(/-?pipeline-?/, '').replaceAll('/','')
 	echo env.APP_NAME
