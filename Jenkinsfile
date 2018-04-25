@@ -22,7 +22,7 @@ node('master') {
 }
 
 node('maven') {
-	echo 'env'
+	sh "echo env"
   def mvnCmd = 'mvn'
   String pomFileLocation = env.BUILD_CONTEXT_DIR ? "${env.BUILD_CONTEXT_DIR}/pom.xml" : "pom.xml"
 
