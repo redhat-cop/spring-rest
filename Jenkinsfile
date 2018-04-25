@@ -6,8 +6,8 @@ node (''){
     env.SOURCE_CONTEXT_DIR = ""
     env.UBER_JAR_CONTEXT_DIR = "target/"
     env.MVN_COMMAND = "clean install"
-    env.APP_NAME="spring-rest"
-    //env.APP_NAME = "${env.JOB_NAME}".replaceAll(/-?${env.PROJECT_NAME}-?/, '').replaceAll(/-?pipeline-?/, '').replaceAll('/','')
+    env.APP_NAME = "${env.JOB_NAME}".replaceAll(/-?${env.PROJECT_NAME}-?/, '').replaceAll(/-?pipeline-?/, '').replaceAll('/','')
+	echo env.APP_NAME
     env.OCP_API_SERVER = "${env.OPENSHIFT_API_URL}"
     env.OCP_TOKEN = readFile('/var/run/secrets/kubernetes.io/serviceaccount/token').trim()
 
