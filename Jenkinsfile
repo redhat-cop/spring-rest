@@ -5,7 +5,7 @@ node (''){
     env.DEV_PROJECT = env.OPENSHIFT_BUILD_NAMESPACE
     env.SOURCE_CONTEXT_DIR = ""
     env.UBER_JAR_CONTEXT_DIR = "target/"
-    env.MVN_COMMAND = "clean deploy"
+    env.MVN_COMMAND = "clean install"
     env.APP_NAME = "${env.JOB_NAME}".replaceAll(/-?${env.PROJECT_NAME}-?/, '').replaceAll(/-?pipeline-?/, '').replaceAll('/','')
 	echo env.APP_NAME
     env.OCP_API_SERVER = "${env.OPENSHIFT_API_URL}"
