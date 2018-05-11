@@ -22,7 +22,9 @@ node('jenkins-slave-mvn') {
   }
 
   stage('Build App') {
-	sh "mvn ${env.MVN_COMMAND} -DaltDeploymentRepository=${MVN_RELEASE_DEPLOYMENT_REPOSITORY}"
+	//sh "mvn ${env.MVN_COMMAND} -DaltDeploymentRepository=${MVN_RELEASE_DEPLOYMENT_REPOSITORY}"
+	sh "mvn ${env.MVN_COMMAND} "
+	
   }
   stage('Build Image') {
 	sh "oc start-build ${env.APP_NAME} --from-dir=${env.UBER_JAR_CONTEXT_DIR} --follow"
