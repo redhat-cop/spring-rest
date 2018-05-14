@@ -31,6 +31,8 @@ node('jenkins-slave-mvn') {
   }
   stage('Build Image') {
 	sh "oc start-build ${env.APP_NAME} --from-dir=${env.UBER_JAR_CONTEXT_DIR} --follow"
+
+	sh "oc tag java-app:latest java-app:${pom.version}"
   }
 
   // no user changes should be needed below this point
