@@ -5,7 +5,7 @@ node (''){
     env.DEV_PROJECT = env.OPENSHIFT_BUILD_NAMESPACE
     env.SOURCE_CONTEXT_DIR = ""
     env.UBER_JAR_CONTEXT_DIR = "target/"
-    env.MVN_COMMAND = "clean deploy"
+    env.MVN_COMMAND = "clean install"
     env.APP_NAME = "${env.JOB_NAME}".replaceAll(/-?${env.PROJECT_NAME}-?/, '').replaceAll(/-?pipeline-?/, '').replaceAll('/','')
 	echo env.APP_NAME
     env.OCP_API_SERVER = "${env.OPENSHIFT_API_URL}"
@@ -14,7 +14,7 @@ node (''){
 	env.PREPROD_PROJECT="roridedi-demo"
 	env.APP_DEV="roridedi-dev"
 	env.MVN_SNAPSHOT_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus-roridedi-ci-cd.apps.s9.core.rht-labs.com/repository/maven-snapshots"
-    env.MVN_RELEASE_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus-roridedi-ci-cd.apps.s9.core.rht-labs.com/repository/maven-releases"
+    env.MVN_RELEASE_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus-roridedi-ci-cd.apps.s9.core.rht-labs.com/repository/maven-releases/"
 }
 
 
@@ -26,7 +26,7 @@ node('jenkins-slave-mvn') {
   }
 
   stage('Build App') {
-	sh "mvn ${env.MVN_COMMAND}  -DaltDeploymentRepository=${MVN_RELEASE_DEPLOYMENT_REPOSITORY}"
+	sh "mvn ${env.MVN_COMMAND} "
 	pom = readMavenPom file: 'pom.xml'
 	echo 'POM VERSION ${pom.version}'
 	
