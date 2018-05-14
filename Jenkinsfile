@@ -26,7 +26,7 @@ node('jenkins-slave-mvn') {
   stage('Build App') {
 	sh "mvn ${env.MVN_COMMAND} "
 	pom = readMavenPom file: 'pom.xml'
-	echo 'POM VERSION' ${pom.version}
+	echo 'POM VERSION ${pom.version}'
 	
   }
   stage('Build Image') {
