@@ -51,4 +51,4 @@ node('jenkins-slave-mvn') {
 
   }
 }
-}
+
