@@ -56,8 +56,7 @@ node('jenkins-slave-mvn') {
 
   // no user changes should be needed below this point
   stage ('Deploy to Dev') {
-    openshiftTag (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", destStream: "${env.APP_NAME}", destTag: "${pom.version}", destinationAuthToken: "${env.OCP_TOKEN}", destinationNamespace: "${env.APP_DEV}", namespace: "${env.DEV_PROJECT}", srcStream: "${env.APP_NAME}", srcTag: "${pom.version}")
-
+    openshiftDeploy (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", deploymentConfig: "${env.APP_NAME}")
     openshiftVerifyDeployment (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", depCfg: "${env.APP_NAME}", namespace: "${env.DEV_PROJECT}", verifyReplicaCount: true)
   }
 	  stage ('Deploy to PreProd') {
