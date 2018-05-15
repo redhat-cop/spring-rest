@@ -42,10 +42,10 @@ node('jenkins-slave-mvn') {
     sh "${mvnCmd} test"
   }
 
-  stage('Code Analysis') {
-    echo "Running Code Analysis"
-    sh "${mvnCmd} sonar:sonar -Dsonar.host.url=http://${env.sonarHost} -Dsonar.projectName=${JOB_BASE_NAME}-${env.devTag}"
-  }
+ // stage('Code Analysis') {
+ //   echo "Running Code Analysis"
+ //   sh "${mvnCmd} sonar:sonar -Dsonar.host.url=http://${env.sonarHost} -Dsonar.projectName=${JOB_BASE_NAME}-${env.devTag}"
+ // }
   
   stage('Build Image') {
 	sh "oc start-build ${env.APP_NAME} --from-dir=${env.UBER_JAR_CONTEXT_DIR} --follow"
