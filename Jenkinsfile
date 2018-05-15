@@ -5,7 +5,7 @@ node (''){
     env.DEV_PROJECT = env.OPENSHIFT_BUILD_NAMESPACE
     env.SOURCE_CONTEXT_DIR = ""
     env.UBER_JAR_CONTEXT_DIR = "target/"
-    env.MVN_COMMAND = "clean install"
+    env.MVN_COMMAND = "clean package spring-boot:repackage -DskipTests"
     env.APP_NAME = "${env.JOB_NAME}".replaceAll(/-?${env.PROJECT_NAME}-?/, '').replaceAll(/-?pipeline-?/, '').replaceAll('/','')
 	echo env.APP_NAME
     env.OCP_API_SERVER = "${env.OPENSHIFT_API_URL}"
@@ -26,7 +26,7 @@ node('jenkins-slave-mvn') {
   }
 
   stage('Build App') {
-	sh "mvn ${env.MVN_COMMAND} "
+	sh "mvn ${env.MVN_COMMAND} -s ./nexus_settings.xml"
 	pom = readMavenPom file: 'pom.xml'
 	echo 'POM VERSION ${pom.version}'
 	
