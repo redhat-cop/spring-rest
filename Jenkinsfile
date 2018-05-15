@@ -16,11 +16,7 @@ node (''){
 	env.MVN_SNAPSHOT_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus-roridedi-ci-cd.apps.s9.core.rht-labs.com/repository/maven-snapshots"
     env.MVN_RELEASE_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus-roridedi-ci-cd.apps.s9.core.rht-labs.com/repository/maven-releases/"
     env.sonarHost = "sonarqube-roridedi-ci-cd.apps.s9.core.rht-labs.com"
-    env.groupId    = getGroupIdFromPom("pom.xml")
-	env.artifactId = getArtifactIdFromPom("pom.xml")
-	env.version    = getVersionFromPom("pom.xml")
-	env.packageType    = getPackagingFromPom("pom.xml")
-	env.devTag  = "${version}-${BUILD_NUMBER}"
+
 }
 
 
@@ -42,10 +38,15 @@ node('jenkins-slave-mvn') {
     sh "${mvnCmd} test"
   }
 
- // stage('Code Analysis') {
- //   echo "Running Code Analysis"
- //   sh "${mvnCmd} sonar:sonar -Dsonar.host.url=http://${env.sonarHost} -Dsonar.projectName=${JOB_BASE_NAME}-${env.devTag}"
- // }
+  stage('Code Analysis') {
+    echo "Running Code Analysis"
+        env.groupId    = getGroupIdFromPom("pom.xml")
+	env.artifactId = getArtifactIdFromPom("pom.xml")
+	env.version    = getVersionFromPom("pom.xml")
+	env.packageType    = getPackagingFromPom("pom.xml")
+	env.devTag  = "${version}-${BUILD_NUMBER}"
+    sh "${mvnCmd} sonar:sonar -Dsonar.host.url=http://${env.sonarHost} -Dsonar.projectName=${JOB_BASE_NAME}-${env.devTag}"
+  }
   
   stage('Build Image') {
 	sh "oc start-build ${env.APP_NAME} --from-dir=${env.UBER_JAR_CONTEXT_DIR} --follow"
