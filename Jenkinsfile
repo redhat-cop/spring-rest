@@ -45,7 +45,7 @@ node('jenkins-slave-mvn') {
 	env.version    = getVersionFromPom("pom.xml")
 	env.packageType    = getPackagingFromPom("pom.xml")
 	env.devTag  = "${version}-${BUILD_NUMBER}"
-    sh "mvn ${env.MVN_COMMAND} sonar:sonar -Dsonar.host.url=http://${env.sonarHost} -Dsonar.projectName=${JOB_BASE_NAME}-${env.devTag}"
+    sh "mvn ${env.MVN_COMMAND} sonar:sonar -Dsonar.host.url=http://${env.sonarHost}  -Dsonar.login=admin -Dsonar.password=admin -Dsonar.projectName=${JOB_BASE_NAME}-${env.devTag}"
   }
   
   stage('Build Image') {
