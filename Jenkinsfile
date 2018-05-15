@@ -15,12 +15,12 @@ node (''){
 	env.APP_DEV="roridedi-dev"
 	env.MVN_SNAPSHOT_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus-roridedi-ci-cd.apps.s9.core.rht-labs.com/repository/maven-snapshots"
     env.MVN_RELEASE_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus-roridedi-ci-cd.apps.s9.core.rht-labs.com/repository/maven-releases/"
-    def sonarHost = "sonarqube-roridedi-ci-cd.apps.s9.core.rht-labs.com"
-    def groupId    = getGroupIdFromPom("pom.xml")
-	def artifactId = getArtifactIdFromPom("pom.xml")
-	def version    = getVersionFromPom("pom.xml")
-	def packageType    = getPackagingFromPom("pom.xml")
-	def devTag  = "${version}-${BUILD_NUMBER}"
+    env.sonarHost = "sonarqube-roridedi-ci-cd.apps.s9.core.rht-labs.com"
+    env.groupId    = getGroupIdFromPom("pom.xml")
+	env.artifactId = getArtifactIdFromPom("pom.xml")
+	env.version    = getVersionFromPom("pom.xml")
+	env.packageType    = getPackagingFromPom("pom.xml")
+	env.devTag  = "${version}-${BUILD_NUMBER}"
 }
 
 
@@ -44,7 +44,7 @@ node('jenkins-slave-mvn') {
 
   stage('Code Analysis') {
     echo "Running Code Analysis"
-    sh "${mvnCmd} sonar:sonar -Dsonar.host.url=http://${sonarHost} -Dsonar.projectName=${JOB_BASE_NAME}-${devTag}"
+    sh "${mvnCmd} sonar:sonar -Dsonar.host.url=http://${env.sonarHost} -Dsonar.projectName=${JOB_BASE_NAME}-${env.devTag}"
   }
   
   stage('Build Image') {
