@@ -15,6 +15,12 @@ node (''){
 	env.APP_DEV="roridedi-dev"
 	env.MVN_SNAPSHOT_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus-roridedi-ci-cd.apps.s9.core.rht-labs.com/repository/maven-snapshots"
     env.MVN_RELEASE_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus-roridedi-ci-cd.apps.s9.core.rht-labs.com/repository/maven-releases/"
+    def sonarHost = "sonarqube-roridedi-ci-cd.apps.s9.core.rht-labs.com"
+    def groupId    = getGroupIdFromPom("pom.xml")
+	def artifactId = getArtifactIdFromPom("pom.xml")
+	def version    = getVersionFromPom("pom.xml")
+	def packageType    = getPackagingFromPom("pom.xml")
+	def devTag  = "${version}-${BUILD_NUMBER}"
 }
 
 
@@ -31,6 +37,16 @@ node('jenkins-slave-mvn') {
 	echo 'POM VERSION ${pom.version}'
 	
   }
+    stage('Unit Tests') {
+    echo "Running Unit Tests"
+    sh "${mvnCmd} test"
+  }
+
+  stage('Code Analysis') {
+    echo "Running Code Analysis"
+    sh "${mvnCmd} sonar:sonar -Dsonar.host.url=http://${sonarHost} -Dsonar.projectName=${JOB_BASE_NAME}-${devTag}"
+  }
+  
   stage('Build Image') {
 	sh "oc start-build ${env.APP_NAME} --from-dir=${env.UBER_JAR_CONTEXT_DIR} --follow"
 
@@ -51,4 +67,25 @@ node('jenkins-slave-mvn') {
 
   }
 }
+// Convenience Functions to read variables from the pom.xml
+// Do not change anything below this line.
+// --------------------------------------------------------
+def getVersionFromPom(pom) {
+  def matcher = readFile(pom) =~ '<version>(.+)</version>'
+  matcher ? matcher[0][1] : null
+}
 
+def getGroupIdFromPom(pom) {
+  def matcher = readFile(pom) =~ '<groupId>(.+)</groupId>'
+  matcher ? matcher[0][1] : null
+}
+
+def getArtifactIdFromPom(pom) {
+  def matcher = readFile(pom) =~ '<artifactId>(.+)</artifactId>'
+  matcher ? matcher[0][1] : null
+}
+
+def getPackagingFromPom(pom) {
+  def matcher = readFile(pom) =~ '<packaging>(.+)</packaging>'
+  matcher ? matcher[0][1] : null
+}
