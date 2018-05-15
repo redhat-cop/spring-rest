@@ -2,7 +2,7 @@
 
 
 node (''){
-    env.DEV_PROJECT = env.OPENSHIFT_BUILD_NAMESPACE
+    env.DEV_PROJECT = roridedi-ci-cd
     env.SOURCE_CONTEXT_DIR = ""
     env.UBER_JAR_CONTEXT_DIR = "target/"
     env.MVN_COMMAND = "clean package spring-boot:repackage -DskipTests"
