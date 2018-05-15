@@ -60,7 +60,7 @@ node('jenkins-slave-mvn') {
     openshiftVerifyDeployment (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", depCfg: "${env.APP_NAME}", namespace: "${env.DEV_PROJECT}", verifyReplicaCount: true)
   }
 	  stage ('Deploy to PreProd') {
-    input "Promote Application to PreProd?"
+   // input "Promote Application to PreProd?"
     openshiftTag (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", destStream: "${env.APP_NAME}", destTag: "${pom.version}", destinationAuthToken: "${env.OCP_TOKEN}", destinationNamespace: "${env.PREPROD_PROJECT}", namespace: "${env.DEV_PROJECT}", srcStream: "${env.APP_NAME}", srcTag: "${pom.version}")
 
     openshiftVerifyDeployment (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", depCfg: "${env.APP_NAME}", namespace: "${env.PREPROD_PROJECT}", verifyReplicaCount: true)
