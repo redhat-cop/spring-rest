@@ -35,7 +35,7 @@ node('jenkins-slave-mvn') {
   }
     stage('Unit Tests') {
     echo "Running Unit Tests"
-    sh "${mvnCmd} test"
+    sh "mvn ${env.MVN_COMMAND} test"
   }
 
   stage('Code Analysis') {
