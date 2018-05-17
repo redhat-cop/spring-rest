@@ -51,15 +51,16 @@ node('jenkins-slave-mvn') {
   stage('Build Image') {
 	sh "oc start-build ${env.APP_NAME} --from-dir=${env.UBER_JAR_CONTEXT_DIR} --follow"
 
-	sh "oc tag java-app:latest java-app:${pom.version}"
   }
 
   // no user changes should be needed below this point
-  stage ('Deploy to Dev') {
+ stage ('Deploy to Dev') {
+	 	sh "oc tag java-app:latest java-app:${pom.version}"
+
     //openshiftDeploy (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", deploymentConfig: "${env.APP_NAME}")
     //openshiftTag (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", destStream: "${env.APP_NAME}", destTag: "latest", destinationAuthToken: "${env.OCP_TOKEN}", destinationNamespace: "${env.DEV_PROJECT}", namespace: "${env.DEV_PROJECT}", srcStream: "${env.APP_NAME}", srcTag: "latest")
- openshiftTag (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", destStream: "${env.APP_NAME}", destTag: "latest", destinationAuthToken: "${env.OCP_TOKEN}", destinationNamespace: "${env.APP_DEV}", namespace: "${env.DEV_PROJECT}", srcStream: "${env.APP_NAME}", srcTag: "latest")
-    openshiftVerifyDeployment (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", depCfg: "${env.APP_NAME}", namespace: "${env.env.APP_DEV}", verifyReplicaCount: true)
+// openshiftTag (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", destStream: "${env.APP_NAME}", destTag: "latest", destinationAuthToken: "${env.OCP_TOKEN}", destinationNamespace: "${env.APP_DEV}", namespace: "${env.DEV_PROJECT}", srcStream: "${env.APP_NAME}", srcTag: "latest")
+ //   openshiftVerifyDeployment (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", depCfg: "${env.APP_NAME}", namespace: "${env.env.APP_DEV}", verifyReplicaCount: true)
   }
 	  stage ('Deploy to PreProd') {
    input "Promote Application to PreProd?"
