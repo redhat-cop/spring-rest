@@ -13,7 +13,10 @@ public class Welcome {
     this.paths = paths;
   }
 
+  
+  
   public String getMessage() {
+    System.out.println("Just before return for testing purpose only");
     return message;
   }
 
