@@ -14,7 +14,7 @@
 		<java.version>1.8</java.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
-		<spring-boot.bom.version>1.5.8.Final-redhat-1</spring-boot.bom.version>
+		<spring-boot.bom.version>1.5.13.Final-redhat-3</spring-boot.bom.version>
 		<springboot.version>1.5.8.RELEASE</springboot.version>
 		<springboot.metrics.version>0.5.1.RELEASE</springboot.metrics.version>
 		<prometheus.client.version>0.1.0</prometheus.client.version>
@@ -87,12 +87,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
-
 		<dependency>
-			<groupId>org.mongodb</groupId>
-			<artifactId>mongodb-driver</artifactId>
-			<version>3.6.1</version>
+			<groupId>de.flapdoodle.embed</groupId>
+			<artifactId>de.flapdoodle.embed.mongo</artifactId>
+			<version>2.1.1</version>
 		</dependency>
+
 	</dependencies>
 
 
