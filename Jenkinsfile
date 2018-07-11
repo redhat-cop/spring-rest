@@ -38,15 +38,15 @@ node('maven') {
     sh "mvn ${env.MVN_COMMAND} test"
   }
 
-  stage('Code Analysis') {
-    echo "Running Code Analysis"
-        env.groupId    = getGroupIdFromPom("pom.xml")
-	env.artifactId = getArtifactIdFromPom("pom.xml")
-	env.version    = getVersionFromPom("pom.xml")
-	env.packageType    = getPackagingFromPom("pom.xml")
-	env.devTag  = "${version}-${BUILD_NUMBER}"
-    sh "mvn ${env.MVN_COMMAND} sonar:sonar -Dsonar.host.url=http://${env.sonarHost}  -Dsonar.login=admin -Dsonar.password=admin -Dsonar.projectName=${JOB_BASE_NAME}-${env.devTag}"
-  }
+//  stage('Code Analysis') {
+  //  echo "Running Code Analysis"
+    //    env.groupId    = getGroupIdFromPom("pom.xml")
+//	env.artifactId = getArtifactIdFromPom("pom.xml")
+//	env.version    = getVersionFromPom("pom.xml")
+//	env.packageType    = getPackagingFromPom("pom.xml")
+//	env.devTag  = "${version}-${BUILD_NUMBER}"
+  //  sh "mvn ${env.MVN_COMMAND} sonar:sonar -Dsonar.host.url=http://${env.sonarHost}  -Dsonar.login=admin -Dsonar.password=admin -Dsonar.projectName=${JOB_BASE_NAME}-${env.devTag}"
+ // }
   
   stage('Build Image') {
 	sh "oc start-build ${env.APP_NAME} --from-dir=${env.UBER_JAR_CONTEXT_DIR} --follow"
