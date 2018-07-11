@@ -59,9 +59,9 @@ node('maven') {
 
   // no user changes should be needed below this point
  stage ('Deploy to Dev') {
-	 	sh "oc tag spring-rest:latest spring-rest:${pom.version} -n basic-spring-boot-dev"
+	 	sh "oc tag spring-rest:latest spring-rest:${pom.version}"
 
-    //openshiftDeploy (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", deploymentConfig: "${env.APP_NAME}")
+    openshiftDeploy (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", deploymentConfig: "${env.APP_NAME}")
       //openshiftDeploy (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", deploymentConfig: "spring-rest",namespace: "basic-spring-boot-dev")
     
 	//openshiftTag (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", destStream: "${env.APP_NAME}", destTag: "latest", destinationAuthToken: "${env.OCP_TOKEN}", destinationNamespace: "${env.APP_DEV}", namespace: "${env.APP_DEV}", srcStream: "${env.APP_NAME}", srcTag: "latest")
