@@ -16,3 +16,9 @@ The app uses [Spring Fox](http://springfox.github.io/springfox/) to generate an 
 1. `git clone`
 2. `cd spring-rest/` 
 3. `mvn spring-boot:run`
+4. `open locahost:8080 on your browser`
+
+
+## Running On Openshift
+
+1.`complete the steps outlined here https://github.com/redhat-cop/container-pipelines/tree/master/basic-spring-boot`
