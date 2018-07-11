@@ -12,7 +12,10 @@ node (''){
     env.OCP_TOKEN = readFile('/var/run/secrets/kubernetes.io/serviceaccount/token').trim()
     env.MVN_RELEASE_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus:8081/repository/maven-releases"
 	env.PREPROD_PROJECT="roridedi-demo"
-	env.APP_DEV="roridedi-dev"
+	env.APP_DEV="basic-spring-boot-dev"
+	env.APP_STAGE="basic-spring-boot-stage"
+	env.APP_PROD="basic-spring-boot-prod"
+	
 	env.MVN_SNAPSHOT_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus-roridedi-ci-cd.apps.s9.core.rht-labs.com/repository/maven-snapshots"
     env.MVN_RELEASE_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus-roridedi-ci-cd.apps.s9.core.rht-labs.com/repository/maven-releases/"
     env.sonarHost = "sonarqube-roridedi-ci-cd.apps.s9.core.rht-labs.com"
@@ -57,9 +60,9 @@ node('maven') {
  stage ('Deploy to Dev') {
 	 	sh "oc tag java-app:latest java-app:${pom.version}"
 
-    //openshiftDeploy (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", deploymentConfig: "${env.APP_NAME}")
-    //openshiftTag (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", destStream: "${env.APP_NAME}", destTag: "latest", destinationAuthToken: "${env.OCP_TOKEN}", destinationNamespace: "${env.DEV_PROJECT}", namespace: "${env.DEV_PROJECT}", srcStream: "${env.APP_NAME}", srcTag: "latest")
-// openshiftTag (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", destStream: "${env.APP_NAME}", destTag: "latest", destinationAuthToken: "${env.OCP_TOKEN}", destinationNamespace: "${env.APP_DEV}", namespace: "${env.DEV_PROJECT}", srcStream: "${env.APP_NAME}", srcTag: "latest")
+    openshiftDeploy (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", deploymentConfig: "${env.APP_NAME}")
+    openshiftTag (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", destStream: "${env.APP_NAME}", destTag: "latest", destinationAuthToken: "${env.OCP_TOKEN}", destinationNamespace: "${env.DEV_PROJECT}", namespace: "${env.DEV_PROJECT}", srcStream: "${env.APP_NAME}", srcTag: "latest")
+	openshiftTag (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", destStream: "${env.APP_NAME}", destTag: "latest", destinationAuthToken: "${env.OCP_TOKEN}", destinationNamespace: "${env.APP_DEV}", namespace: "${env.DEV_PROJECT}", srcStream: "${env.APP_NAME}", srcTag: "latest")
  //   openshiftVerifyDeployment (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", depCfg: "${env.APP_NAME}", namespace: "${env.env.APP_DEV}", verifyReplicaCount: true)
   }
 	  stage ('Deploy to PreProd') {
