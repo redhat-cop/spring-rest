@@ -16,6 +16,7 @@ node (''){
 	env.APP_DEV="basic-spring-boot-dev"
 	env.APP_STAGE="basic-spring-boot-stage"
 	env.APP_PROD="basic-spring-boot-prod"
+	env.APP_BUILD="basic-spring-boot-build"
 	
 	env.MVN_SNAPSHOT_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus-roridedi-ci-cd.apps.s9.core.rht-labs.com/repository/maven-snapshots"
     env.MVN_RELEASE_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus-roridedi-ci-cd.apps.s9.core.rht-labs.com/repository/maven-releases/"
@@ -61,8 +62,14 @@ node('maven') {
  stage ('Deploy to Dev') {
 	 	sh "oc tag spring-rest:latest spring-rest:${pom.version}"
 
-    openshiftDeploy (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", deploymentConfig: "${env.APP_NAME}", namespace: "${env.APP_DEV}")
+   
+       openshiftTag (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", destStream: "${env.APP_NAME}", destTag: 'latest', destinationAuthToken: "${env.OCP_TOKEN}", destinationNamespace: "${env.APP_DEV}", namespace: "${env.env.APP_BUILD}", srcStream: "${env.APP_NAME}", srcTag: 'latest')
+
     openshiftVerifyDeployment (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", depCfg: "${env.APP_NAME}", namespace: "${env.APP_DEV}", verifyReplicaCount: true)
+   
+   
+   // openshiftDeploy (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", deploymentConfig: "${env.APP_NAME}", namespace: "${env.APP_DEV}")
+    //openshiftVerifyDeployment (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", depCfg: "${env.APP_NAME}", namespace: "${env.APP_DEV}", verifyReplicaCount: true)
     
       //openshiftDeploy (apiURL: "${env.OCP_API_SERVER}", authToken: "${env.OCP_TOKEN}", deploymentConfig: "spring-rest",namespace: "basic-spring-boot-dev")
     
