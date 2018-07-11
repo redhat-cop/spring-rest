@@ -21,7 +21,7 @@ node (''){
 
 
 
-node('jenkins-slave-mvn') {
+node('jenkins-slave-maven-rhel7') {
 
   stage('SCM Checkout') {
     checkout scm
