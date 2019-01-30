@@ -17,10 +17,10 @@ node (''){
 	env.APP_STAGE="basic-spring-boot-stage"
 	env.APP_PROD="basic-spring-boot-prod"
 	env.APP_BUILD="basic-spring-boot-build"
-	
-	env.MVN_SNAPSHOT_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus-roridedi-ci-cd.apps.s9.core.rht-labs.com/repository/maven-snapshots"
-    env.MVN_RELEASE_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus-roridedi-ci-cd.apps.s9.core.rht-labs.com/repository/maven-releases/"
-    env.sonarHost = "sonarqube-roridedi-ci-cd.apps.s9.core.rht-labs.com"
+	 
+	env.MVN_SNAPSHOT_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus-labs-ci-cd.apps.rhpds311.openshift.opentlc.com/repository/maven-snapshots"
+    env.MVN_RELEASE_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus-labs-ci-cd.apps.rhpds311.openshift.opentlc.com/repository/maven-releases/"
+  //  env.sonarHost = "sonarqube-roridedi-ci-cd.apps.s9.core.rht-labs.com"
 
 }
 
