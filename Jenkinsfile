@@ -2,7 +2,7 @@
 
 
 node (''){
-    env.DEV_PROJECT = "roridedi-ci-cd"
+    env.DEV_PROJECT = "labs-ci-cd"
     env.SOURCE_CONTEXT_DIR = ""
     env.UBER_JAR_CONTEXT_DIR = "target/"
     env.MVN_COMMAND = "clean package spring-boot:repackage -DskipTests"
