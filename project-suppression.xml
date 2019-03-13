@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.2.xsd">
+	<suppress>
+	   <notes><![CDATA[
+	   file name: spring-boot-starter-2.1.2.RELEASE.jar
+	   ]]></notes>
+	   <cve>CVE-2011-2730</cve>
+	</suppress>
+</suppressions>

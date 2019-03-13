@@ -4,12 +4,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.metrics.instrument.Counter;
-import org.springframework.metrics.instrument.MeterRegistry;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
-
 
 @RestController
 public class GreetingController {
@@ -17,8 +14,8 @@ public class GreetingController {
     private static final String template = "Hello, %s!";
     private final Counter counter;
 
-    public GreetingController(MeterRegistry registry) {
-       counter = registry.counter("greeting_counter");
+    public GreetingController() {
+       counter = new Counter("greeting_counter");
     }
 
     @RequestMapping(value = "/v1/greeting" ,  method = RequestMethod.GET)

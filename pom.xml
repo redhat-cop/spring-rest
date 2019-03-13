@@ -14,10 +14,8 @@
 		<java.version>1.8</java.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
-		<spring-boot.bom.version>1.5.8.Final-redhat-1</spring-boot.bom.version>
-		<springboot.version>1.5.8.RELEASE</springboot.version>
-		<springboot.metrics.version>0.5.1.RELEASE</springboot.metrics.version>
-		<prometheus.client.version>0.1.0</prometheus.client.version>
+		<spring-boot.bom.version>2.1.2.Final-redhat-00003</spring-boot.bom.version>
+		<springboot.version>2.1.2.RELEASE</springboot.version>
 		<springfox-version>2.8.0</springfox-version>
 		<swagger-core-version>1.5.10</swagger-core-version>
 	</properties>
@@ -38,21 +36,21 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+        		<exclusion>
+		            <groupId>org.springframework.boot</groupId>
+		            <artifactId>spring-boot-starter-tomcat</artifactId>
+        		</exclusion>
+    		</exclusions>
+		</dependency>
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.metrics</groupId>
-			<artifactId>spring-metrics</artifactId>
-			<version>${springboot.metrics.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.prometheus</groupId>
-			<artifactId>simpleclient_common</artifactId>
-			<version>${prometheus.client.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -125,7 +123,8 @@
 				<artifactId>dependency-check-maven</artifactId>
 				<version>5.0.0-M1</version>
 				<configuration>
-					<failBuildOnCVSS>4</failBuildOnCVSS>
+					<failBuildOnCVSS>7</failBuildOnCVSS>
+					<suppressionFile>project-suppression.xml</suppressionFile>
 				</configuration>
 				<executions>
 					<execution>
