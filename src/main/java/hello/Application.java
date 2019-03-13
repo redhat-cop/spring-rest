@@ -3,7 +3,7 @@ package hello;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.metrics.export.prometheus.EnablePrometheusMetrics;
+import org.springframework.boot.web.embedded.undertow.UndertowBuilderCustomizer;
 
 import com.google.common.base.Predicate;
 
@@ -22,7 +22,6 @@ import static springfox.documentation.builders.PathSelectors.*;
 import static com.google.common.base.Predicates.*;
 
 @SpringBootApplication
-@EnablePrometheusMetrics
 @EnableSwagger2
 @ComponentScan(basePackages = {"hello"})
 public class Application {
