@@ -2,10 +2,21 @@
 
 This is a simple app using Spring Boot as part of [Red Hat OpenShift Application Runtimes](https://middlewareblog.redhat.com/2017/05/05/red-hat-openshift-application-runtimes-and-spring-boot-details-you-want-to-know/).
 
-## Usage to Run Locally
+## Running Locally
 
 1. `git clone`
-2. `mvn spring-boot:run`
+2. `cd spring-rest/` 
+3. `mvn spring-boot:run -Dspring.profiles.active="dev"`
+4. `open locahost:8080 on your browser`
+
+
+## Running On Openshift
+
+1. `run oc new-app https://raw.githubusercontent.com/openshift/origin/master/examples/db-templates/mongodb-ephemeral-template.json -p MONGODB_USER=user -p MONGODB_PASSWORD=password -p MONGODB_DATABASE=greeting`
+2. `run oc expose svc/mongodb`
+3. `git clone`
+4. `cd spring-rest/` 
+5. `run mvn fabric8:deploy`
 
 ## OpenAPI (formerly known as Swagger) Support
 
