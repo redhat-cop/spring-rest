@@ -5,6 +5,7 @@
 	   Spring Boot versions of 2.x are being confused with Spring Framework 2.x. Spring Boot 2.x uses Spring Framework 5.x.
 	   ]]></notes>
         <cpe>cpe:/a:springsource:spring_framework:2.1.2</cpe>
+        <cpe>cpe:/a:springsource:spring_framework:2.1.4</cpe>
     </suppress>
     <suppress>
         <notes><![CDATA[

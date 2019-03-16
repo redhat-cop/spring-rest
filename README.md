@@ -16,7 +16,7 @@ This is a simple app using Spring Boot as part of [Red Hat OpenShift Application
 2. `run oc expose svc/mongodb`
 3. `git clone`
 4. `cd spring-rest/` 
-5. `run mvn fabric8:deploy`
+5. `run mvn fabric8:deploy -DskipTests`
 
 ## OpenAPI (formerly known as Swagger) Support
 
