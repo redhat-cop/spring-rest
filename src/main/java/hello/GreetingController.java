@@ -40,7 +40,7 @@ public class GreetingController {
 		return greeting;
 	}
 
-	@RequestMapping(value = "/v1/allgreetings", method = RequestMethod.GET)
+	@RequestMapping(value = "/v1/greeting", method = RequestMethod.GET)
 	@ApiOperation(value = "Returns A List of Greetings")
 	public List<Greeting> allGreetings() {
 		return respository.findAll();
