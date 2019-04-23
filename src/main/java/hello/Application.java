@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.undertow.UndertowBuilderCustomizer;
 
+/*
 import com.google.common.base.Predicate;
 
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -14,15 +15,16 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger.web.UiConfigurationBuilder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+*/
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
-import static springfox.documentation.builders.PathSelectors.*;
-import static com.google.common.base.Predicates.*;
+//import static springfox.documentation.builders.PathSelectors.*;
+//import static com.google.common.base.Predicates.*;
 
 @SpringBootApplication
-@EnableSwagger2
+//@EnableSwagger2
 @ComponentScan(basePackages = {"hello"})
 public class Application {
 
@@ -32,7 +34,7 @@ public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);    
     }
-
+/*
     @Bean
     public Docket swaggerSpringMvcPlugin() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -42,7 +44,9 @@ public class Application {
             .paths(apiPaths())
             .build();
     }
-    
+    */
+/*
+
     @Bean
     UiConfiguration uiConfig() {
 
@@ -54,7 +58,9 @@ public class Application {
 
         return builder.build();
     }
+*/
 
+/*
 
     private Predicate<String> apiPaths() {
         return or(
@@ -63,8 +69,9 @@ public class Application {
                 regex("/v1/envinfo.*"),
                 regex("/v1/*")
         );
-    }    
-
+    }
+*/
+/*
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
             .title("Openshift uncontained.io Sample REST API")
@@ -74,4 +81,5 @@ public class Application {
             .version("2.0")
             .build();
     }
+    */
 }
