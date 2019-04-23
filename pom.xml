@@ -82,6 +82,7 @@
         </dependency>
         -->
         <!-- https://mvnrepository.com/artifact/io.swagger/swagger-core -->
+        <!--
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-core</artifactId>
