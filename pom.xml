@@ -57,29 +57,37 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <!--SpringFox dependencies -->
+        <!--
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>${springfox-version}</version>
         </dependency>
+        -->
+        
+        <!--
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${springfox-version}</version>
         </dependency>
+        -->
         <!-- Guava version override for https://github.com/springfox/springfox/issues/2795 -->
+        
+        <!--
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>27.1-jre</version>
         </dependency>
+        -->
         <!-- https://mvnrepository.com/artifact/io.swagger/swagger-core -->
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-core</artifactId>
             <version>${swagger-core-version}</version>
         </dependency>
-
+        -->
     </dependencies>
 
 
