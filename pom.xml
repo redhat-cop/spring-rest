@@ -113,12 +113,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- sonarqube scanner plugin -->
-			<plugin>
-				<groupId>org.sonarsource.scanner.maven</groupId>
-				<artifactId>sonar-maven-plugin</artifactId>
-				<version>3.6.0.1398</version>
-			</plugin>
+
 			<!-- fabric8 plugin -->
 			<plugin>
 				<groupId>io.fabric8</groupId>
