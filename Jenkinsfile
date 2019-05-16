@@ -21,7 +21,7 @@ node('master') {
 
 }
 
-node('maven') {
+node('jenkins-slave-mvn') {
 //  def mvnHome = "/usr/share/maven/"
 //  def mvnCmd = "${mvnHome}bin/mvn"
   def mvnCmd = 'mvn'
