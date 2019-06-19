@@ -39,7 +39,7 @@ node('jenkins-slave-mvn') {
 
   stage('Unit Test') {
 
-     sh "${mvnCmd} test -f ${pomFileLocation}"
+     sh "${mvnCmd} test -f ${pomFileLocation} -Dmaven.test.skip=true"
 
   }
 
