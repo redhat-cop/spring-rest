@@ -1,4 +1,4 @@
-package hello;
+package openshift.cop;
 
 public class Counter {
 	

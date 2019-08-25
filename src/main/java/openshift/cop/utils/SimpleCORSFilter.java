@@ -1,4 +1,4 @@
-package hello.utils;
+package openshift.cop.utils;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
