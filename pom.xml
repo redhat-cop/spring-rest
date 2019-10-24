@@ -14,10 +14,11 @@
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <spring-boot.bom.version>2.1.2.Final-redhat-00003</spring-boot.bom.version>
-        <springboot.version>2.1.2.RELEASE</springboot.version>
+        <spring-boot.bom.version>2.1.6.SP3-redhat-00001</spring-boot.bom.version>
+        <springboot.version>2.1.6.RELEASE</springboot.version>
         <springfox-version>2.8.0</springfox-version>
         <swagger-core-version>1.5.10</swagger-core-version>
+        <undertow.version>2.0.25.SP1-redhat-00001</undertow.version>
     </properties>
 
     <dependencyManagement>
@@ -32,8 +33,24 @@
             <dependency>
               <groupId>com.fasterxml.jackson.core</groupId>
               <artifactId>jackson-databind</artifactId>
-              <version>2.9.9.3</version>
-            </dependency>
+              <version>2.9.10.1</version>
+          </dependency>
+          <!-- CVE Fixes not yet avail in BOM -->
+          <dependency>
+              <groupId>io.undertow</groupId>
+              <artifactId>undertow-core</artifactId>
+              <version>${undertow.version}</version>
+          </dependency>
+          <dependency>
+              <groupId>io.undertow</groupId>
+              <artifactId>undertow-servlet</artifactId>
+              <version>${undertow.version}</version>
+          </dependency>
+          <dependency>
+              <groupId>io.undertow</groupId>
+              <artifactId>undertow-websockets-jsr</artifactId>
+              <version>${undertow.version}</version>
+          </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -141,7 +158,7 @@
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-                <version>5.0.0-M1</version>
+                <version>5.2.2</version>
                 <configuration>
                     <failBuildOnCVSS>4</failBuildOnCVSS>
                     <suppressionFile>project-suppression.xml</suppressionFile>
