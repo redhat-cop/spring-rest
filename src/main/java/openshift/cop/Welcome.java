@@ -1,4 +1,4 @@
-package hello;
+package openshift.cop;
 
 import java.util.List;
 import java.util.Arrays;

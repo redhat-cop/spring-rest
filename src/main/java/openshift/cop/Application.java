@@ -1,4 +1,4 @@
-package hello;
+package openshift.cop;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -25,7 +25,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 //@EnableSwagger2
-@ComponentScan(basePackages = {"hello"})
+@ComponentScan(basePackages = {"openshift.cop"})
 public class Application {
 
 	@Value("${shift.rest.disableValidator}")
