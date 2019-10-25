@@ -15,7 +15,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <spring-boot.bom.version>2.1.6.Final</spring-boot.bom.version>
-        <springboot.version>2.1.6.RELEASE</springboot.version>
+        <springboot.version>2.1.2.RELEASE</springboot.version>
         <springfox-version>2.8.0</springfox-version>
         <swagger-core-version>1.5.10</swagger-core-version>
     </properties>
@@ -143,7 +143,7 @@
                 <artifactId>dependency-check-maven</artifactId>
                 <version>5.0.0-M1</version>
                 <configuration>
-                    <failBuildOnCVSS>4</failBuildOnCVSS>
+                    <failBuildOnCVSS>8</failBuildOnCVSS>
                     <suppressionFile>project-suppression.xml</suppressionFile>
                 </configuration>
                 <executions>
