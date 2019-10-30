@@ -1,4 +1,4 @@
-package openshift.cop;
+package openshift.cop.test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
