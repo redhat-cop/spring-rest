@@ -126,7 +126,7 @@
                 <artifactId>dependency-check-maven</artifactId>
                 <version>5.2.2</version>
                 <configuration>
-                    <failBuildOnCVSS>4</failBuildOnCVSS>
+                    <failBuildOnCVSS>8</failBuildOnCVSS>
                     <suppressionFile>project-suppression.xml</suppressionFile>
                 </configuration>
                 <executions>
