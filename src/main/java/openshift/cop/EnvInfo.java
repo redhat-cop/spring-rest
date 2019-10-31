@@ -22,7 +22,7 @@ public class EnvInfo {
 
   public static Map<String,String> mapEnvInfo(String filter) throws IOException {
       Process proc = Runtime.getRuntime().exec("env");
-      Map<String, String> ret = new HashMap<String,String>();
+      Map<String, String> ret = new HashMap<>();
             try (InputStream stream = proc.getInputStream()) {
           try (Scanner s = new Scanner(stream).useDelimiter("\\n")) {
         	  while (s.hasNext())

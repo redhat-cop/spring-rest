@@ -21,7 +21,7 @@ public class GreetingControllerTest {
 	private MockMvc mockMvc;
 
 	@Test
-	public void testGreeting() throws Exception {
+	public void testGreetingV1() throws Exception {
 		this.mockMvc.perform(get("/v1/greeting").header("Origin", "*")).andDo(print()).andExpect(status().isOk())
 				.andExpect(content().string(containsString("Hello, World!")));
 	}
