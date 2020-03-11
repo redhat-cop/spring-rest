@@ -1,0 +1,39 @@
+on: pull_request
+name: OpenShift - Build and Deploy
+jobs:
+  build:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout Code
+      uses: actions/checkout@master
+#    - name: Apply OCP Artifacts
+#      uses: redhat-developer/openshift-actions@v1.1
+#      with:
+#        version: ''
+#        openshift_server_url: ${{ secrets.OCP_SERVER }}
+#        parameters: '{"apitoken": "${{ secrets.OCP_TOKEN }}"}'
+#        cmd: |
+#          'process -f .openshift/templates/imagestream.yaml NAMESPACE=spring-test'
+#          'process -f .openshift/templates/build.yaml NAMESPACE=spring-test'
+#          'process -f .openshift/templates/deploy.yaml NAMESPACE=spring-test'
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+    - name: Build with Maven
+      run: mvn -B clean install -DskipTests=true --file pom.xml
+    - name: Run Tests
+      run: mvn test -f pom.xml
+    - name: Collect binaries
+      run: |
+        mkdir -p deployments
+        find ./ -type f \( -iname \*.ear -o -iname \*.jar -o -iname \*.war \) -exec mv '{}' /deployments/ \;
+    - name: Build Container Image 
+      uses: redhat-developer/openshift-actions@v1.1
+      with:
+        version: 'latest'
+        openshift_server_url: ${{ secrets.OCP_SERVER }}
+        parameters: '{"apitoken": "${{ secrets.OCP_TOKEN }}"}'
+        cmd: |
+          'start-build basic-spring --from-dir=deployments'
+#    - name: Deploy to Dev
