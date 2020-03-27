@@ -14,7 +14,7 @@
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <spring-boot.bom.version>2.1.13.SP3-redhat-00001</spring-boot.bom.version>
+        <spring-boot.bom.version>2.1.13.Final-redhat-00001</spring-boot.bom.version>
         <springboot.version>2.1.13.RELEASE</springboot.version>
         <undertow.version>2.0.28.SP1-redhat-00001</undertow.version>
         <spring.restdocs.version>2.0.3.RELEASE</spring.restdocs.version>
