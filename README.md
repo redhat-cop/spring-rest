@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/hexpm/l/plug.svg?maxAge=2592000)]()
+[![License](https://img.shields.io/hexpm/l/plug.svg?maxAge=2592000)]() ![Java CI with Maven](https://github.com/redhat-cop/spring-rest/workflows/Java%20CI%20with%20Maven/badge.svg)
 
 # Spring Rest - A RESTful API written in Spring Boot
 
