@@ -16,7 +16,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <snowdrop-dependencies.version>2.2.6.Final-redhat-00001</snowdrop-dependencies.version>
         <springboot.version>2.2.6.RELEASE</springboot.version>
-        <undertow.version>2.0.28.SP1-redhat-00001</undertow.version>
+        <undertow.version>2.2.0.Final</undertow.version>
         <spring.restdocs.version>2.0.3.RELEASE</spring.restdocs.version>
     </properties>
 
@@ -133,7 +133,7 @@
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-                <version>5.2.2</version>
+                <version>6.0.2</version>
                 <configuration>
                     <failBuildOnCVSS>8</failBuildOnCVSS>
                     <suppressionFile>project-suppression.xml</suppressionFile>
