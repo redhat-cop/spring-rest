@@ -12,4 +12,10 @@
 	   ]]></notes>
         <cpe>cpe:/a:springsource:spring_framework:1.2.0</cpe>
     </suppress>
+    <suppress>
+        <notes><![CDATA[
+    Ignore CVE-2016-1000027 as we are not vulnerable, see https://github.com/spring-projects/spring-framework/issues/24434
+     ]]></notes>
+        <cve>CVE-2016-1000027</cve>
+    </suppress>
 </suppressions>
